@@ -1,97 +1,113 @@
 import java.util.*;
 
-public class Main {
-    public static void main(String args[]) {
-        List<String> list = new ArrayList<String>();
-        List <String> lista_especial = new ArrayList <String>();
-        List<Integer> suma = new ArrayList <Integer> ();
-        int tam = 0;
-        int nummes = 0;
-        int contador = 0;
-        Scanner input = new Scanner (System.in);
-        boolean condicion1 = true;
-        boolean condicion2 = true;
-        int mesa = 10;
-        int contfin = 0;
-        ArrayList<ArrayList<mesa>> tables = new ArrayList<ArrayList<mesa>>();
-    
-        while (condicion1){
-            System.out.print ("Ingrese primero el tamano de la mesa y luego la cantidad de mesas de ese tamano\n");
-            System.out.print("Cual es el tamano de las mesas que tienen disponibles (personas que caben)\n");
-            nummes = input.nextInt();
-            System.out.print("Cuantas mesas de ese tamano tiene?\n ");
-            tam = input.nextInt();
-            suma.add(tam);
-            
-            int sum = 0;
-            for (int i: suma){
-                sum += i;
-            }
-            System.out.print("La suma total es: " + sum + "\n");
-    
-            if (sum == mesa){
-                condicion1 = false;
-            }
-            else if (sum > mesa){
-                System.out.print("\n \n El numero de mesas es mayor al ingresado\n \n");
-                System.out.print("Porfavor ingrese el tamano y la cantidad de nuevo\n");
-                  suma.removeAll(suma);
-                  sum = 0;
-                continue;
-            }
-            ArrayList <mesa> contenedorDeMesaTemp = new ArrayList<mesa>();
-            for (int i = 0; i <= tam-1; i++){
-              mesa abc = new mesa(nummes);
-              contenedorDeMesaTemp.add(abc);
-            }
-            tables.add(contenedorDeMesaTemp);
-            System.out.println(tables);
-          }
+public class Main 
+{ 
+	public static void main(String[] args) {
+		PriorityQueueClients queue = new PriorityQueueClients();
+		ArrayList<mesa> mesas = new ArrayList<>();
+		Scanner input = new Scanner (System.in);
+		Scanner inputS= new Scanner (System.in);
+		boolean condicion = true;
+		String nombreRestaurante;
 
+		System.out.print ("Ingrese el nombre de su restaurante: \n");
+		nombreRestaurante = inputS.next();
 
-        while (condicion2){
-          System.out.print("1. Agregar lista espera\n2. Agregar lista de espera especial\n3. Ver listas\n");
-          int dec1 = input.nextInt();
+		while (condicion){
+			System.out.print("\n\n");
+			System.out.print("         *** " + nombreRestaurante + " ***\n");
+			System.out.print("__________________________________________");
+			System.out.print("\n      1. Agregar mesas\n      2. Agregar clientes a la queue\n      3. Ver queue\n      4. Asignar mesa a cliente\n      5. Ver disponibilidad\n ");
+			System.out.print("__________________________________________\n");
+			System.out.print("Ingrese la opcion del menu: ");
+			int dec = input.nextInt();
+			
+			switch(dec){
+				case 1:
+
+					System.out.print ("Ingrese cuantas mesas tiene su restaurante: \n");
+					int m = input.nextInt();
+					int contador = 0;
+					for (int j = 1; j < m+1; j++){
+						System.out.print ("Cuantas asientos tiene la mesa numero:" + j + "?\n");
+						int cantidad = input.nextInt();
+						mesa table = new mesa (cantidad);
+						contador = contador + 1;
+						mesas.add(table);
+						System.out.print ("Mesa numero:" + contador + "," + cantidad + " de asientos\n");
+					}
+					break;
+
+				case 2:
+					System.out.print ("\nIngrese cuantos clientes desea agregar a la lista de espera: \n");
+					int c = input.nextInt();
+					for (int i = 0; i < c; i++){
+						System.out.print ("\nIngrese un nombre para representar al grupo: \n");
+						String cliente = inputS.next();
+						System.out.print ("\n¿Cuántas personas vienen en el grupo? \n");
+						int p = input.nextInt();
+						client persona = new client (cliente,p);
+						queue.add(persona);
+						System.out.print (persona + "\n");
+				}
+					break;
+
+				case 3:
+					for(int i = 0; i < queue.size(); i++) {
+						System.out.println(queue.get(i).toString());
+					}
+
+					break;
+
+				case 4:
+				System.out.print ("Agregando clientes a mesas segun la prioridad\n");
+                for (int i = 0; i < 100; i++) {
+                  if (i == 0)
+                      System.out.print("Proceso completado: " + i + " %");
+                  try {
+                      Thread.sleep(20);
+                  } catch (Exception e) {
+                      System.out.println(e);
+                  }
+                  if (i > 9 && i <= 100) {
+                      System.out.print('\b');
+                      System.out.print('\b');
+                      System.out.print('\b');
+                      System.out.print('\b');
           
-    
-          switch (dec1){
-            case 1: 
-            do {
-                System.out.println("La lista de espera es" + list);
-                System.out.println("Agregar cliente? (y/n)");
-                if (input.next().startsWith("y")) {
-                    System.out.println("Ingrese el nombre del cliente : ");
-                    list.add(input.next());
-                } else {
-                    break;
-                }
-            } while (true);
-            System.out.println("Clientes en cola " + list);
-            break;
-    
-            case 2:
-            do {
-                System.out.println("La lista de espera especial es" + lista_especial);
-                System.out.println("Agregar cliente? (y/n)");
-                if (input.next().startsWith("y")) {
-                    System.out.println("Ingrese el nombre del cliente : ");
-                    lista_especial.add(input.next());
-                } else {
-                    break;
-                }
-            } while (true);
-            System.out.println("Clientes en espera especial " + lista_especial);
-            break;
-            case 3:
-            System.out.println("___________________________");
-            System.out.println("Espera: " +list + "\n");
-            System.out.println("___________________________");
-            System.out.println("Espera especial: " +lista_especial + "\n");
-            break;
-    
-            case 4:
-            break;
-            }   
-         }
-    }
-  }
+                      System.out.print(i + " %");
+                  } else {
+                      System.out.print('\b');
+                      System.out.print('\b');
+                      System.out.print('\b');
+          
+                      System.out.print(i + " %");
+          
+                  }
+              }
+              System.out.print ("\nClientes agregados a mesas!\n\n");
+					for(int i = 0; i < mesas.size(); i++) {
+						mesa tempMesa = mesas.get(i);
+						int cantidad = tempMesa.verCantidad();
+						client tempclient = queue.remove(cantidad);
+						if(tempclient != null)
+							tempMesa.assignarClient(tempclient);
+					}
+
+					break;
+
+				case 5:
+					//ver mesas 
+					for(int i = 0; i < mesas.size(); i++) {
+						System.out.println(mesas.get(i).toString());
+					}
+					break;
+			}
+		}
+
+		//revisar clientes en la queue
+		// for(int i = 0; i < queue.size(); i++) {
+		//     System.out.println(queue.get(i).toString());
+		// }
+	}
+}
