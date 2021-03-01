@@ -103,7 +103,7 @@ public class Main
                             mesa tempMesa = mesas.get(i);
                             int cantidad = tempMesa.verCantidad();
                             client tempclient = queue.remove(cantidad);
-                            System.out.print (tempclient + "\n");
+                            System.out.print ("\n" +tempclient + "\n");
                             if(tempclient != null){
                                 tempMesa.assignarClient(tempclient);
                                      }
