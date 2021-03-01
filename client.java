@@ -14,6 +14,6 @@ class client {
     
     @Override
     public String toString() {
-        return "Nombre:" + nombre + " P: " + prioridad;
+        return "👤 Nombre: " + nombre + " 👥 P: " + prioridad;
     }
 }
