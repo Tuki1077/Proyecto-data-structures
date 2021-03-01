@@ -18,6 +18,37 @@ public class Main
 			System.out.print("         *** " + nombreRestaurante + " ***\n");
 			System.out.print("__________________________________________");
 			System.out.print("\n      1. Agregar mesas\n      2. Agregar clientes a la queue\n      3. Ver queue\n      4. Asignar mesa a cliente\n      5. Ver disponibilidad\n ");
+import java.util.*;
+
+public class Main 
+{ 
+	public static void main(String[] args) {
+		PriorityQueueClients queue = new PriorityQueueClients();
+		ArrayList<mesa> mesas = new ArrayList<>();
+		Scanner input = new Scanner (System.in);
+		Scanner inputS= new Scanner (System.in);
+		boolean condicion = true;
+        String nombreRestaurante;
+        
+        System.out.print(" \n ---------------------------  ");
+        System.out.print("\n|                           |");
+        System.out.print("\n \n|  Bienvenido a FLASH WAIT! | \n");
+        System.out.print("\n|                           |");
+        System.out.print(" \n ---------------------------  \n");
+        System.out.print("  🪑 ┬─┬ 🪑      🪑 ┬─┬ 🪑\n");
+
+        System.out.print ("\n Ingrese el nombre de su restaurante: \n");
+        System.out.print ("¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯ \n");
+		nombreRestaurante = inputS.next();
+		System.out.print("  ***Porfavor ingrese sus mesas primero***!   ");
+
+		while (condicion){
+			System.out.print("\n\n");
+			System.out.print("         *** " + nombreRestaurante + " ***\n");
+			System.out.print("__________________________________________");
+      		System.out.print("\n\n\n");
+
+			System.out.print("\n      1. Agregar mesas\n      2. Agregar clientes a la queue\n      3. Ver queue\n      4. Asignar mesa a cliente\n      5. Ver disponibilidad\n      6. Remover cliente de mesa\n      7. Salir\n");
 			System.out.print("__________________________________________\n");
 			System.out.print("Ingrese la opcion del menu: ");
 			int dec = input.nextInt();
@@ -90,6 +121,7 @@ public class Main
 						mesa tempMesa = mesas.get(i);
 						int cantidad = tempMesa.verCantidad();
 						client tempclient = queue.remove(cantidad);
+						System.out.print (tempclient + "\n");
 						if(tempclient != null)
 							tempMesa.assignarClient(tempclient);
 					}
@@ -102,12 +134,25 @@ public class Main
 						System.out.println(mesas.get(i).toString());
 					}
 					break;
+				
+				case 6:
+					for (int i = 0; i<mesas.size(); i++){
+					System.out.print (mesas.get(i).toString() + "\n");
+					}
+					System.out.print("Ingrese el numero de mesa en la lista que desea vaciar: ");
+					System.out.print("\n\n");
+					int vaciar = input.nextInt();
+					mesas.get(vaciar - 1).removeCliente();
+					for (int i = 0; i<mesas.size(); i++){
+						System.out.print (mesas.get(i).toString() + "\n");
+						}
+					
+					break;
+
+				case 7:
+					System.out.print ("Gracias por utilizar Flash Wait... Que tenga un buen dia!");
+					System.exit(0);
 			}
 		}
-
-		//revisar clientes en la queue
-		// for(int i = 0; i < queue.size(); i++) {
-		//     System.out.println(queue.get(i).toString());
-		// }
 	}
 }
