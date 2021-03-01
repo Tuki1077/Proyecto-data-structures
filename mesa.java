@@ -3,6 +3,10 @@ class mesa {
     int cantidad; //cantidad de sillas en la mesa
     boolean disponibilidad; //Si mesa esta ocupada o no
     
+    String si = "Si";
+    String no = "No";
+
+
     mesa(int cantidad){
         this.cantidad = cantidad;
         this.disponibilidad = true;
@@ -33,14 +37,13 @@ class mesa {
         this.clienteAsignado = null;
         this.disponibilidad = true;
     }
-    
     @Override 
     public String toString() {
         if(disponibilidad != true){
-            return "Mesa de " + cantidad + " disponible: "+ disponibilidad + " cliente: " + clienteAsignado.toString();
+            return "Mesa de " + cantidad + " disponible?: "+ no + " ❌ . " + " Cliente: " +  clienteAsignado.toString();
         }
         else{
-            return "Mesa de " + cantidad + " disponible: "+ disponibilidad;
+            return "Mesa de " + cantidad + "personas disponible?: "+ si + " ✅ . ";
         }
         
     }
