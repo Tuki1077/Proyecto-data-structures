@@ -19,12 +19,6 @@ class mesa {
         this.disponibilidad = false;
     }
     
-    //retirar al cliente y desocupar la mesa
-    public void retirarCliente(){
-        this.clienteAsignado = null;
-        this.disponibilidad  = true;
-    }
-    
      public int verCantidad(){
         return cantidad;
     }
@@ -33,6 +27,7 @@ class mesa {
     public boolean esDisponible() {
         return disponibilidad;
     }
+    //retira el cliente y vacia la mesa
     public void removeCliente(){
         this.clienteAsignado = null;
         this.disponibilidad = true;
