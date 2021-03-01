@@ -29,6 +29,10 @@ class mesa {
     public boolean esDisponible() {
         return disponibilidad;
     }
+    public void removeCliente(){
+        this.clienteAsignado = null;
+        this.disponibilidad = true;
+    }
     
     @Override 
     public String toString() {
